@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CatApiController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/cats', [CatApiController::class, 'index']);
+Route::get('/cats/{id}', [CatApiController::class, 'show']);
+Route::get('/cats/{tag}', [CatApiController::class, 'search']);

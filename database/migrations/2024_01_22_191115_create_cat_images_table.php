@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('cat_images', function (Blueprint $table) {
-            $table->id(); // Camp d'id$tablet
+            $table->id();
             $table->string('_id')->unique(); // Camp únic per emmagatzemar l'_id
             $table->string('mimetype');
             $table->integer('size');
