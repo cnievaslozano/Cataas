@@ -34,15 +34,16 @@ class CatApiController extends Controller
 
     public function search(Request $request, $tag)
     {
-        $tag = "\"{$tag}\""; // Añadir las comillas y barras invertidas necesarias
+        // Escapamos el tag para asegurar el formato correcto
+        $escapedTag = '"' . $tag . '"';
 
-        $cats = CatImage::where('tags', 'LIKE', "%{$tag}%")->get()->map(function ($cat) {
-            return $this->transformCat($cat);
-        });
+        // Realizamos la búsqueda utilizando el tag recibido
+        $cats = CatImage::whereJsonContains('tags', $escapedTag)->get();
 
-
+        // Devolvemos la respuesta JSON con los resultados de la búsqueda
         return response()->json($cats);
     }
+
 
 
     private function transformCat($cat)
